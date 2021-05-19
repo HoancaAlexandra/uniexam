@@ -58,13 +58,13 @@ class Calendar:
                 count = 0
                 for j in result[i]:
                     count += 1
-                count = str(count)+ 'examene'
+                count = str(count)+ ' examene'
                 w = tk.Label(self.parent, text=count)
                 w.grid(row=13, column=2, columnspan=7)
                 break
             else:
                 w=tk.Label(self.parent,text='\t\t\t\t\t')
-                w.grid(row=13,column=0,columnspan=7)
+                w.grid(row=70,column=0,columnspan=7)
 
 
     def selection(self, day, name):
@@ -127,12 +127,12 @@ class printbirth:
 if __name__ == '__main__':
     birth_list = []
 
-    with open('Lista participanților și informații despre ziua de naștere.csv', 'r') as birth:
+    with open('Lista examen.csv', 'r') as birth:
         csv_reader = csv.reader(birth, delimiter=',', quotechar='"')
         for row in csv_reader:
             if row[1] == '' or row[1] == 'Nume' or row[3] == '':
                 continue
-            birth_info = {row[1]: row[3]}  # 딕셔너리 사용
+            birth_info = {row[1]: row[3]}
             birth_list.append(birth_info)
 
     result = {}
