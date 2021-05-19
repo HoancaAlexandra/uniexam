@@ -46,6 +46,31 @@ class Calendar:
         self.setup(self.year, self.month)
 
     def findexam(self,a,b):
+<<<<<<< HEAD
+=======
+        date = 'luna'
+        if a == 11 or a == 1 or a == 2 or a == 4 or a == 5 or a == 7 or a == 10:
+            x = a - 1
+            if (x == 0):
+                x = 12
+            y = b + 4
+            if y >= 31:
+                x = a
+                y = b - 26
+        else:
+            x = a - 1
+            if (x == 0):
+                x = 12
+            y = b + 4
+            if y >= 30:
+                x = a
+                y = b - 25
+
+        x = date+str(x) + '/' + str(y)
+
+        ww = tk.Label(self.parent, text=x)
+        ww.grid(row=9, column=0, columnspan=7)
+>>>>>>> 2e64fa3fda8090c3783d2dbf98ea6ba9ab381168
 
         if (a < 10):
             a = '0' + str(a)
@@ -58,7 +83,11 @@ class Calendar:
                 count = 0
                 for j in result[i]:
                     count += 1
+<<<<<<< HEAD
                 count = str(count)+'persoana/persoane'
+=======
+                count = str(count)+'Examen'
+>>>>>>> 2e64fa3fda8090c3783d2dbf98ea6ba9ab381168
                 w = tk.Label(self.parent, text=count)
                 w.grid(row=13, column=2, columnspan=7)
                 break
@@ -157,7 +186,11 @@ if __name__ == '__main__':
         def __init__(self, parent):
             self.parent = parent
             self.choose_btn = tk.Button(self.parent, text='Iesirea calendarului', command=self.popup)
+<<<<<<< HEAD
             self.show_btn = tk.Button(self.parent, text='Lista tuturor zilelor de naștere ale studenților', command=self.print_selected_date)
+=======
+            self.show_btn = tk.Button(self.parent, text='Lista examenelor', command=self.print_selected_date)
+>>>>>>> 2e64fa3fda8090c3783d2dbf98ea6ba9ab381168
             self.choose_btn.grid()
             self.show_btn.grid()
             self.data = {}
@@ -171,6 +204,10 @@ if __name__ == '__main__':
 
 
     root = tk.Tk()
+<<<<<<< HEAD
     root.title("성신여자대학교 융합보안공학과 20171934 백혜민")
+=======
+    root.title("Exam planner")
+>>>>>>> 2e64fa3fda8090c3783d2dbf98ea6ba9ab381168
     app = Control(root)
     root.mainloop()
