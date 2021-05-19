@@ -54,11 +54,11 @@ class Calendar:
         for i in result.keys():
             if (i == a):
                 w = tk.Label(self.parent,text=result[i])
-                w.grid(row=13, column=0, columnspan=7)
+                w.grid(row=70, column=0, columnspan=20)
                 count = 0
                 for j in result[i]:
                     count += 1
-                count = str(count)+'persoana/persoane'
+                count = str(count)+ 'examene'
                 w = tk.Label(self.parent, text=count)
                 w.grid(row=13, column=2, columnspan=7)
                 break
@@ -171,6 +171,6 @@ if __name__ == '__main__':
 
 
     root = tk.Tk()
-    root.title("성신여자대학교 융합보안공학과 20171934 백혜민")
+    root.title("Exam planner")
     app = Control(root)
     root.mainloop()
