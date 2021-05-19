@@ -4,6 +4,7 @@ import tkinter as tk
 import csv
 from collections import deque
 
+
 class Calendar:
     def __init__(self, parent, values):
         self.values = values
@@ -41,12 +42,11 @@ class Calendar:
             self.month = 1
             self.year += 1
 
-
         self.clear()
         self.setup(self.year, self.month)
 
-    def findexam(self,a,b):
-        date = 'luna'
+    def findpeople(self, a, b):
+        date = 'luna asta '
         if a == 11 or a == 1 or a == 2 or a == 4 or a == 5 or a == 7 or a == 10:
             x = a - 1
             if (x == 0):
@@ -64,7 +64,8 @@ class Calendar:
                 x = a
                 y = b - 25
 
-        x = date+str(x) + '/' + str(y)
+        #x = date + str(x) + '/' + str(y)
+        x=""
         ww = tk.Label(self.parent, text=x)
         ww.grid(row=9, column=0, columnspan=7)
 
@@ -74,19 +75,19 @@ class Calendar:
 
         for i in result.keys():
             if (i == a):
-                w = tk.Label(self.parent,text=result[i])
-                w.grid(row=13, column=0, columnspan=7)
+                #w = tk.Label(self.parent, text=result[i])
+                #w.grid(row=13, column=0, columnspan=7)
+                w = "Au examen - "
                 count = 0
                 for j in result[i]:
                     count += 1
-                count = str(count)+'Examen'
+                count = "Au examene -> " + str(count) + ' persoane'
                 w = tk.Label(self.parent, text=count)
                 w.grid(row=13, column=2, columnspan=7)
                 break
             else:
-                w=tk.Label(self.parent,text='\t\t\t\t\t')
-                w.grid(row=13,column=0,columnspan=7)
-
+                w = tk.Label(self.parent, text='\t\t\t\t\t')
+                w.grid(row=13, column=0, columnspan=7)
 
     def selection(self, day, name):
         self.day_selected = day
@@ -105,11 +106,16 @@ class Calendar:
 
     def setup(self, y, m):
 
+        #photo = tk.PhotoImage(file='piggie.gif')
+        #w = tk.Label(self.parent, image=photo)
+        #w.photo = photo
+        #w.grid(row=0, column=7)
+
         left = tk.Button(self.parent, text='<', command=self.go_prev)
         self.wid.append(left)
         left.grid(row=1, column=1)
 
-        header = tk.Label(self.parent, height=2, text='{}{}   {}'.format("Anul  ", str(y),calendar.month_abbr[m]))
+        header = tk.Label(self.parent, height=2, text='{}{}   {}'.format(str(y), "", calendar.month_abbr[m]))
         self.wid.append(header)
         header.grid(row=1, column=2, columnspan=3)
 
@@ -117,7 +123,7 @@ class Calendar:
         self.wid.append(right)
         right.grid(row=1, column=5)
 
-        days = ('duminica', 'luni', 'marti', 'miercuri', 'joi', 'vineri', 'sambata')
+        days = ('Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sambata', 'Duminica')
         for num, name in enumerate(days):
             t = tk.Label(self.parent, text=name[:3])
             self.wid.append(t)
@@ -132,26 +138,28 @@ class Calendar:
                     b.grid(row=w, column=d)
 
         sel = tk.Label(self.parent, height=2, text='{} {} {}'.format(
-            self.month_selected, '/', self.day_selected,self.findexam(self.month_selected,
-                                                                        self.day_selected)))
+            self.month_selected, '/', self.day_selected, self.findpeople(self.month_selected,
+                                                                         self.day_selected)))
         self.wid.append(sel)
         sel.grid(row=8, column=0, columnspan=7)
+
 
 class printbirth:
     def __init__(self):
         window = tk.Tk()
         deque_list = deque(birth_list)
         for i in birth_list:
-            w2 = tk.Label(window,padx=10,text=i).pack()
+            w2 = tk.Label(window, padx=10, text=i).pack()
             print(w2)
+
 
 if __name__ == '__main__':
     birth_list = []
 
-    with open('myFile0.csv', 'r') as birth:
+    with open('myfile.CSV', 'r') as birth:
         csv_reader = csv.reader(birth, delimiter=',', quotechar='"')
         for row in csv_reader:
-            if row[1] == '' or row[1] == 'Nume' or row[3] == '':
+            if row[1] == '' or row[1] == 'Nume ' or row[3] == '':
                 continue
             birth_info = {row[1]: row[3]}
             birth_list.append(birth_info)
@@ -177,8 +185,8 @@ if __name__ == '__main__':
     class Control:
         def __init__(self, parent):
             self.parent = parent
-            self.choose_btn = tk.Button(self.parent, text='Iesirea calendarului', command=self.popup)
-            self.show_btn = tk.Button(self.parent, text='Lista examenelor', command=self.print_selected_date)
+            self.choose_btn = tk.Button(self.parent, text='Calendar', command=self.popup)
+            self.show_btn = tk.Button(self.parent, text='Afisare lista studenti', command=self.print_selected_date)
             self.choose_btn.grid()
             self.show_btn.grid()
             self.data = {}
@@ -192,6 +200,6 @@ if __name__ == '__main__':
 
 
     root = tk.Tk()
-    root.title("Exam planner")
+    root.title("Calendar")
     app = Control(root)
     root.mainloop()
