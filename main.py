@@ -75,19 +75,50 @@ class Calendar:
 
         for i in result.keys():
             if (i == a):
+
                 #w = tk.Label(self.parent, text=result[i])
                 #w.grid(row=13, column=0, columnspan=7)
+                w=0
+                randul=10
+                with open("myfile_3.CSV", 'r') as f:
+                    csv_reader = csv.reader(f, delimiter=',', quotechar='"')
+                    #print(csv_reader)
+                    for row in csv_reader: ##revenire aici
+                        if str(i).strip() in str(row[3]).strip():
+                            #print(row)
+                            #w = tk.Label()
+                            #w.grid(row=10, column=1, columnspan=7)
+                            if w==0:
+                                w=tk.Label(self.parent, text=row[1]+" are examen la "+ row[4] + " in sala "+ row[5]+" la ora "+row[6])
+                                w.grid(row=randul, column=1, columnspan=7)
+                            else:
+                                randul=randul+1
+                                w = tk.Label(self.parent, text=row[1] + " are examen la " + row[4] + " in sala " + row[5] + " la ora " + row[6])
+                                w.grid(row=randul, column=1, columnspan=7)
+                            #print(row[3])
                 w = "Au examen - "
                 count = 0
                 for j in result[i]:
                     count += 1
                 count = "Au examene -> " + str(count) + ' persoane'
                 w = tk.Label(self.parent, text=count)
-                w.grid(row=13, column=2, columnspan=7)
+                w.grid(row=20, column=2, columnspan=7)
                 break
             else:
-                w = tk.Label(self.parent, text='\t\t\t\t\t')
-                w.grid(row=13, column=0, columnspan=7)
+                w = tk.Label(self.parent,text='\t\t\t\t\t\t\t')
+                w.grid(row=10, column=1, columnspan=10)
+                w = tk.Label(self.parent, text='\t\t\t\t\t\t\t')
+                w.grid(row=11, column=1, columnspan=10)
+                w = tk.Label(self.parent, text='\t\t\t\t\t\t\t')
+                w.grid(row=12, column=1, columnspan=10)
+                w = tk.Label(self.parent, text='\t\t\t\t\t\t\t')
+                w.grid(row=13, column=1, columnspan=10)
+                w = tk.Label(self.parent, text='\t\t\t\t\t\t\t')
+                w.grid(row=14, column=1, columnspan=10)
+                w = tk.Label(self.parent, text='\t\t\t\t\t\t\t')
+                w.grid(row=15, column=1, columnspan=10)
+                w = tk.Label(self.parent, text='\t\t\t\t\t\t\t')
+                w.grid(row=20, column=0, columnspan=7)
 
     def selection(self, day, name):
         self.day_selected = day
@@ -150,13 +181,13 @@ class printbirth:
         deque_list = deque(birth_list)
         for i in birth_list:
             w2 = tk.Label(window, padx=10, text=i).pack()
-            print(w2)
+            #print(w2)
 
 
 if __name__ == '__main__':
     birth_list = []
 
-    with open('myfile.CSV', 'r') as birth:
+    with open('myfile_3.CSV', 'r') as birth:
         csv_reader = csv.reader(birth, delimiter=',', quotechar='"')
         for row in csv_reader:
             if row[1] == '' or row[1] == 'Nume ' or row[3] == '':
@@ -203,3 +234,4 @@ if __name__ == '__main__':
     root.title("Calendar")
     app = Control(root)
     root.mainloop()
+
